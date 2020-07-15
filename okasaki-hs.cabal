@@ -38,15 +38,49 @@ common base
                        NoStarIsType
                        BlockArguments
 
+common aux
+  import:              base
+  ghc-options:         -Wall
+                       -threaded
+                       -rtsopts
+                       -with-rtsopts=-N
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+                       -Wcompat
+                       -Widentities
+                       -Wredundant-constraints
+                       -fhide-source-paths
+                       -Wmissing-export-lists
+                       -Wpartial-fields
+                       -Wmissing-home-modules
+                       -- Our test convention for HUnit would make it
+                       -- unnecessarily verbose to add the signature of each test
+                       -fno-warn-missing-signatures
+                       -- Delegate to Tasty to discover tests
+                       -fno-warn-missing-export-lists
+
 library
   import:              base
   hs-source-dirs:      src
   exposed-modules:     Okasaki
+                       Okasaki.Ch02.Data.Set.Class
+                       Okasaki.Ch02.Data.UnbalancedSet
+
+                       Okasaki.Ch02.Ex2_1
+                       Okasaki.Ch02.Ex2_2
+                       Okasaki.Ch02.Ex2_3
+                       Okasaki.Ch02.Ex2_4
+                       Okasaki.Ch02.Ex2_5
+
+                       Sandbox.Criterion1
   build-depends:       base ^>= 4.13
                      , text ^>= 1.2
                      , bytestring ^>= 0.10
                      , time ^>= 1.9
                      , containers ^>= 0.6
+                     , deepseq ^>= 1.4
+                     , criterion ^>= 1.5
+                     , pretty-simple ^>= 3.3
   ghc-options:         -Wall
                        -Wincomplete-uni-patterns
                        -Wincomplete-record-updates
@@ -73,3 +107,39 @@ executable okasaki
                        -Wredundant-constraints
                        -fhide-source-paths
                        -Wpartial-fields
+
+test-suite okasaki-test
+  import:              aux
+  type:                exitcode-stdio-1.0
+  build-depends:     , okasaki
+                     , text
+                     , bytestring
+                     , Glob
+                     , prettyprinter
+                     , filepath
+                     , hedgehog
+                     , tasty
+                     , tasty-golden
+                     , tasty-expected-failure
+                     , tasty-hedgehog
+                     , doctest
+                     , cabal-doctest
+  hs-source-dirs:      test
+  other-modules:       Test.Ch02
+                         Test.Ch02.Ex2_1
+                         Test.Ch02.Ex2_2
+
+                       Test.Support.Gen
+  main-is:             Test.hs
+
+benchmark okasaki-bench
+  import:              aux
+  import:              base
+  type:                exitcode-stdio-1.0
+  build-depends:     , okasaki
+                     , criterion
+  main-is:             Main.hs
+  other-modules:       Bench.Ch02
+                         Bench.Ch02.Ex2_1
+                         Bench.Ch02.Ex2_2
+  hs-source-dirs:      bench

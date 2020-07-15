@@ -1,4 +1,6 @@
 module Main (main) where
 
+import qualified Sandbox.Criterion1 as Criterion1
+
 main :: IO ()
-main = pure ()
+main = Criterion1.main
