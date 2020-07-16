@@ -7,7 +7,7 @@ module Okasaki.Ch02.Data.Set.Class
 
 import Okasaki.Ch02.Data.UnbalancedSet (UnbalancedSet(..))
 
-class Set f a where
+class Ord a => Set f a where
   empty  :: f a
   insert :: a -> f a -> f a
   member :: a -> f a -> Bool

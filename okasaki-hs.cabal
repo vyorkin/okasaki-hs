@@ -25,6 +25,7 @@ common base
   default-extensions:  ConstraintKinds
                        DeriveGeneric
                        GeneralizedNewtypeDeriving
+                       DerivingStrategies
                        InstanceSigs
                        KindSignatures
                        LambdaCase
@@ -51,6 +52,7 @@ common aux
                        -Wredundant-constraints
                        -fhide-source-paths
                        -Wmissing-export-lists
+                       -Wmissing-deriving-strategies
                        -Wpartial-fields
                        -Wmissing-home-modules
                        -- Our test convention for HUnit would make it
@@ -65,12 +67,15 @@ library
   exposed-modules:     Okasaki
                        Okasaki.Ch02.Data.Set.Class
                        Okasaki.Ch02.Data.UnbalancedSet
+                       Okasaki.Ch02.Data.Tree
 
                        Okasaki.Ch02.Ex2_1
                        Okasaki.Ch02.Ex2_2
                        Okasaki.Ch02.Ex2_3
                        Okasaki.Ch02.Ex2_4
-                       Okasaki.Ch02.Ex2_5
+                       Okasaki.Ch02.Ex2_5A
+                       Okasaki.Ch02.Ex2_5B
+                       Okasaki.Ch02.Ex2_6
 
                        Sandbox.Criterion1
   build-depends:       base ^>= 4.13

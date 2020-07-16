@@ -6,7 +6,7 @@ import Control.DeepSeq (NFData, rnf)
 
 data UnbalancedSet a
   = E | T (UnbalancedSet a) a (UnbalancedSet a)
-  deriving (Show)
+  deriving stock (Show)
 
 -- The rnf name stands for “reduce to normal-form.”
 -- It fully evaluates its argument and then returns ().
